@@ -84,7 +84,7 @@ class FourCheesePizzaBuilder implements IPizzaBuilder<BasePizza> {
     }
 
     reset(): void {
-        this.pizza = new BasePizza(PizzaSize.MEDIUM, PizzaShape.ROUND, [PizzaTopping.CHEESE, PizzaTopping.CHEESE_MOCARELLA, PizzaTopping.CHEESE_GAUDA, PizzaTopping.CHEESE_DORBLUE]);
+        this.pizza = new BasePizza(PizzaSize.MEDIUM, PizzaShape.ROUND, []);
     }
 
     setSize(size: PizzaSize): IPizzaBuilder<BasePizza> {
@@ -117,7 +117,7 @@ class PepperoniPizzaBuilder implements IPizzaBuilder<BasePizza> {
     }
 
     reset(): void {
-        this.pizza = new BasePizza(PizzaSize.MEDIUM, PizzaShape.ROUND, [PizzaTopping.PAPPERONI]);
+        this.pizza = new BasePizza(PizzaSize.MEDIUM, PizzaShape.ROUND, []);
     }
 
     setSize(size: PizzaSize): IPizzaBuilder<BasePizza> {
@@ -161,14 +161,22 @@ class PizzaDirector {
         if (!(this.builder instanceof FourCheesePizzaBuilder)) {
             throw new Error('Invalid builder for creating Four Cheese Pizza');
         }
-        return this.builder.build();
+        return this.builder
+            .addTopping(PizzaTopping.CHEESE)
+            .addTopping(PizzaTopping.CHEESE_DORBLUE)
+            .addTopping(PizzaTopping.CHEESE_GAUDA)
+            .addTopping(PizzaTopping.CHEESE_MOCARELLA)
+            .build();
     }
 
     createPepperoniPizza(): BasePizza {
         if (!(this.builder instanceof PepperoniPizzaBuilder)) {
             throw new Error('Invalid builder for creating Pepperoni Pizza');
         }
-        return this.builder.build();
+        return this.builder
+            .addTopping(PizzaTopping.CHEESE)
+            .addTopping(PizzaTopping.PAPPERONI)
+            .build();
     }
 }
 
