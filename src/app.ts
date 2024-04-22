@@ -1,22 +1,15 @@
-showHello('greeting', 'TypeScript');
-
-function showHello(divName: string, name: string) {
-    const elt = document.getElementById(divName);
-    elt!.innerText = `Hello from ${name}`;
-}
-
-enum PizzaSize {
+export enum PizzaSize {
     SMALL = 'Small',
     MEDIUM = 'Medium',
     LARGE = 'Large',
 }
 
-enum PizzaShape {
+export enum PizzaShape {
     ROUND = 'Round',
     SQUARE = 'square'
 }
 
-enum PizzaTopping {
+export enum PizzaTopping {
     CHEESE = 'CheeseRegular',
     CHEESE_MOCARELLA = 'CheeseMocarella',
     CHEESE_GAUDA = 'CheeseGauda',
@@ -35,7 +28,7 @@ interface IPizzaBuilder<T> {
     reset(): void;
 }
 
-class BasePizza {
+export class BasePizza {
     constructor(public size: PizzaSize, public shape: PizzaShape, public toppings: PizzaTopping[]) {}
 
     toString(): string {
@@ -43,7 +36,7 @@ class BasePizza {
     }
 }
 
-class PizzaBuilder implements IPizzaBuilder<BasePizza> {
+export class PizzaBuilder implements IPizzaBuilder<BasePizza> {
     private pizza!: BasePizza;
 
     constructor() {
